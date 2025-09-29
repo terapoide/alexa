@@ -1,7 +1,7 @@
 import speech_recognition as sr
 from agenda import executar_agenda
 from calculadora import calc_main  # como exemplo, se você for usar
-
+from ia import chamar_ollama
 # Todo: 
 # main aguardar ser chamado 
 # main explicar funcoes 
@@ -13,7 +13,7 @@ from calculadora import calc_main  # como exemplo, se você for usar
 reconhecedor = sr.Recognizer()
 
 with sr.Microphone() as mic:
-    reconhecedor.adjust_for_ambient_noise(mic, duration=2)
+    reconhecedor.adjust_for_ambient_noise(mic, duration=5)
     print("O que deseja executar? suas opções são: Agenda ou Calculadora...")
     audio = reconhecedor.listen(mic)
     print("Reconhecendo áudio, aguarde...")
@@ -25,4 +25,4 @@ with sr.Microphone() as mic:
     elif "calculadora" in texto.lower():
         calc_main()  # supondo que você tenha isso no seu módulo calculadora
     else:
-        print("Comando não reconhecido.")
+        chamar_ollama(texto.lower())
